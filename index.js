@@ -7,7 +7,7 @@ const stream = require('readable-stream')
 const queueMicrotask = require('queue-microtask') // TODO: remove when Node 10 is not supported
 const ws = require('ws') // websockets in node - will be empty object in browser
 
-const _WebSocket = typeof ws !== 'function' ? WebSocket : ws
+const _WebSocket = typeof WebSocket == 'function' ? WebSocket : ws
 
 const MAX_BUFFERED_AMOUNT = 64 * 1024
 
