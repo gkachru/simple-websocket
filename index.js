@@ -54,14 +54,14 @@ class Socket extends stream.Duplex {
     } else {
       this.url = opts.url
       try {
-        if (typeof ws === 'function') {
+        if (typeof WebSocket === 'function') {
+          this._ws = new _WebSocket(opts.url)
+        } else {
           // `ws` package accepts options
           this._ws = new _WebSocket(opts.url, null, {
             ...opts,
             encoding: undefined // encoding option breaks ws internals
           })
-        } else {
-          this._ws = new _WebSocket(opts.url)
         }
       } catch (err) {
         queueMicrotask(() => this.destroy(err))
